@@ -1,6 +1,6 @@
 import React, { createContext, useState, useRef } from "react";
 
-const URL = "http://localhost:8080/auth/";
+const URL = "https://socia-media-api.herokuapp.com/auth/";
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {

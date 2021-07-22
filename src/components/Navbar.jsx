@@ -9,7 +9,7 @@ const Navbar = () => {
 		<VStack h="10vh" align="stretch" boxShadow="1px 1px 4px 1px gray">
 			<Flex justify="space-between" align="center">
 				<Box ml={8}>
-					<Heading>Social Media</Heading>
+					<Heading>Socia Media</Heading>
 				</Box>
 				<Box alignSelf="flex-end" m={4}>
 					<Button colorScheme="blue" mr={4}>

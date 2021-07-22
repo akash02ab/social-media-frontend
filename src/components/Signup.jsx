@@ -9,7 +9,7 @@ const Signup = () => {
 	return (
 		<Center h="100vh">
 			<VStack direction="column" align="center" spacing="40px">
-				<Heading size="xl">Social Media</Heading>
+				<Heading size="xl">Socia Media</Heading>
 
 				<Box maxW="sm" borderWidth="1px" borderRadius="lg" p="8">
 					<Grid gap={6}>
