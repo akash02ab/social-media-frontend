@@ -18,6 +18,10 @@ You will also see any lint errors in the console.
 
 -   navigate between login and signup page
 -   one can see error message
+-   one can add new post
+-   one can delete the post that he/she created
+-   one can like the post
+-   one can see the users to follow
 
 ## Screenshots
 
@@ -31,4 +35,4 @@ You will also see any lint errors in the console.
 
 ### Home
 
-![Home Page](./Screenshots/Home.png)
+![Home Page](./Screenshots/Home2.png)

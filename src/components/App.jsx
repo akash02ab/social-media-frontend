@@ -1,18 +1,22 @@
 import { useEffect } from "react";
 import { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import networkInterceptor from "../network/interceptor";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 
 const App = () => {
 	const { getCurrentlySignedInUser } = useContext(AuthContext);
+	const history = useHistory();
 
 	useEffect(() => {
 		getCurrentlySignedInUser();
 		// eslint-disable-next-line
 	}, []);
+
+	networkInterceptor(history);
 
 	return (
 		<Router>

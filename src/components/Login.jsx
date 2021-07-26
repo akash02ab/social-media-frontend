@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import Error from "./Error";
 
 const Login = () => {
-	const { user, inputRef, error, login } = useContext(AuthContext);
+	const { user, inputRef, authError, login } = useContext(AuthContext);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -45,12 +46,6 @@ const Login = () => {
 						<Button colorScheme="blue" onClick={login}>
 							Submit
 						</Button>
-
-						{error && (
-							<Text fontSize="xs" color="tomato">
-								{error}
-							</Text>
-						)}
 					</Grid>
 				</Box>
 
@@ -58,6 +53,8 @@ const Login = () => {
 					<Link to="/signup">Don't have an account? Sign up.</Link>
 				</Text>
 			</VStack>
+
+			{authError && <Error error={authError} />}
 		</Center>
 	);
 };

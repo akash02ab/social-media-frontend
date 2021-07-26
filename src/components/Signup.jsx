@@ -1,11 +1,12 @@
-import { Box, Heading, Input, Button, Grid, VStack, Center, Text } from "@chakra-ui/react";
+import { Box, Heading, Input, Button, Grid, VStack, Center, Text, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import Error from "./Error";
 
 const Signup = () => {
-	const { inputRef, signup, error, success, setAvatar } = useContext(AuthContext);
-
+	const { inputRef, signup, authError, success, setAvatar } = useContext(AuthContext);
+	const toast = useToast();
 	return (
 		<Center h="100vh">
 			<VStack direction="column" align="center" spacing="40px">
@@ -53,24 +54,23 @@ const Signup = () => {
 						<Button colorScheme="blue" onClick={signup}>
 							Submit
 						</Button>
-
-						{success && (
-							<Text fontSize="xs" color="blue">
-								{success}
-							</Text>
-						)}
-
-						{error && (
-							<Text fontSize="xs" color="tomato">
-								{error}
-							</Text>
-						)}
 					</Grid>
 				</Box>
 				<Text fontSize="lg" color="#3182ce">
 					<Link to="/login">Already have an account? Login.</Link>
 				</Text>
 			</VStack>
+
+			{success &&
+				toast({
+					title: "Success",
+					description: success,
+					status: "success",
+					duration: 3000,
+					isClosable: true,
+				})}
+
+			{authError && <Error error={authError} />}
 		</Center>
 	);
 };
