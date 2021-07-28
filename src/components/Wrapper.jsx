@@ -13,8 +13,8 @@ const Wrapper = () => {
 	}, []);
 
 	return (
-		<Center>
-			<HStack w="100vw" d="flex" justify="center">
+		<Center position="relative" overflowX="hidden">
+			<HStack w="100vw" minH="100vh" d="flex" justify="center">
 				{loading ? (
 					<Spinner
 						size="xl"

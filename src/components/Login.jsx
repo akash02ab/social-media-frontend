@@ -1,4 +1,16 @@
-import { Box, Heading, InputGroup, Input, Button, Grid, VStack, Center, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Heading,
+	InputGroup,
+	Input,
+	Button,
+	Grid,
+	VStack,
+	Center,
+	Text,
+	InputLeftElement,
+	Image,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -6,7 +18,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import Error from "./Error";
 
 const Login = () => {
-	const { user, inputRef, authError, login } = useContext(AuthContext);
+	const { user, inputRef, login, authError, setAuthError } = useContext(AuthContext);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -26,6 +38,10 @@ const Login = () => {
 						<Heading size="lg">Login</Heading>
 
 						<InputGroup>
+							<InputLeftElement
+								pointerEvents="none"
+								children={<Image src="/user-circle-solid.svg" boxSize={4} />}
+							/>
 							<Input
 								type="text"
 								placeholder="Username"
@@ -35,6 +51,10 @@ const Login = () => {
 						</InputGroup>
 
 						<InputGroup>
+							<InputLeftElement
+								pointerEvents="none"
+								children={<Image src="/lock-solid.svg" boxSize={4} />}
+							/>
 							<Input
 								type="password"
 								placeholder="Password"
@@ -54,7 +74,7 @@ const Login = () => {
 				</Text>
 			</VStack>
 
-			{authError && <Error error={authError} />}
+			{authError && <Error error={authError} setError={setAuthError} />}
 		</Center>
 	);
 };

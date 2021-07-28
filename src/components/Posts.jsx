@@ -6,7 +6,7 @@ import Error from "./Error";
 import Post from "./Post";
 
 const Posts = () => {
-	const { myPost, toggleForm, setToggleForm, postError } = useContext(PostContext);
+	const { myPost, toggleForm, setToggleForm, postError, setPostError } = useContext(PostContext);
 
 	return (
 		<Box w="80vw" minH="90vh" p={1}>
@@ -17,7 +17,7 @@ const Posts = () => {
 
 				<Grid gap={8}>
 					{myPost.length ? (
-						myPost.map((post, index) => <Post post={post} key={index} index={index} />)
+						myPost.map((post, index) => <Post post={post} key={index} index={index} page="home" />)
 					) : (
 						<Text fontSize="xl">No posts, follow more people</Text>
 					)}
@@ -33,12 +33,12 @@ const Posts = () => {
 				right="25%"
 				onClick={() => setToggleForm(!toggleForm)}
 			>
-				<Text fontSize="lg">+</Text>
+				<Text>+</Text>
 			</Button>
 
 			{toggleForm ? <AddPost /> : null}
 
-			{postError && <Error error={postError} />}
+			{postError && <Error error={postError} setError={setPostError} />}
 		</Box>
 	);
 };

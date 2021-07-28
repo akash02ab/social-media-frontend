@@ -1,10 +1,21 @@
 import { Box, Button, Grid, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { PostContext } from "../contexts/PostContext";
 import { UsersContext } from "../contexts/UsersContext";
 import Error from "./Error";
 
 const Suggestion = () => {
-	const { myProfile: me, users, userError, getMyProfile, getAllUsers, follow } = useContext(UsersContext);
+	const {
+		myProfile: me,
+		users,
+		userError,
+		setUserError,
+		getMyProfile,
+		getAllUsers,
+		follow,
+	} = useContext(UsersContext);
+	const { getAllPostOfMine } = useContext(PostContext);
 
 	useEffect(() => {
 		getMyProfile();
@@ -13,7 +24,7 @@ const Suggestion = () => {
 	}, []);
 
 	return (
-		<Box w="20vw" minH="89vh" bg="blue.50">
+		<Box w="20vw" minHeight="90vh" bg="gray.50" position="fixed" top="10.5%" right={0}>
 			{users.length && me ? (
 				<Grid gap={6} p={4} m={2}>
 					<Text>Follow other users :</Text>
@@ -23,7 +34,7 @@ const Suggestion = () => {
 							<Box p={4} borderRadius="10px" boxShadow="1px 1px 4px 1px grey" bg="white" key={index}>
 								<Grid gap={1}>
 									<Text color="blue.400" fontSize="lg">
-										@{user.username}
+										<Link to={`/profile/${user.username}`}>@{user.username}</Link>
 									</Text>
 
 									<Text color="gray">{`Followers: ${user.followers.length}`}</Text>
@@ -33,7 +44,10 @@ const Suggestion = () => {
 										bg="gray.200"
 										isFullWidth={false}
 										w={28}
-										onClick={() => follow(user.username, index)}
+										onClick={() => {
+											follow(user.username, index);
+											setTimeout(() => getAllPostOfMine(), 1000);
+										}}
 									>
 										Follow
 									</Button>
@@ -48,7 +62,7 @@ const Suggestion = () => {
 				</Text>
 			)}
 
-			{userError && <Error error={userError} />}
+			{userError && <Error error={userError} setError={setUserError} />}
 		</Box>
 	);
 };

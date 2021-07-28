@@ -35,4 +35,8 @@ You will also see any lint errors in the console.
 
 ### Home
 
-![Home Page](./Screenshots/Home2.png)
+![Home Page](./Screenshots/Home.jpeg)
+
+### Profile
+
+![Profile Page](./Screenshots/profile.jpeg)

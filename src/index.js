@@ -7,14 +7,14 @@ import { UsersContextProvider } from "./contexts/UsersContext";
 import { ChakraProvider } from "@chakra-ui/react";
 
 ReactDOM.render(
-	<AuthContextProvider>
-		<PostContextProvider>
+	<ChakraProvider>
+		<AuthContextProvider>
 			<UsersContextProvider>
-				<ChakraProvider>
+				<PostContextProvider>
 					<App />
-				</ChakraProvider>
+				</PostContextProvider>
 			</UsersContextProvider>
-		</PostContextProvider>
-	</AuthContextProvider>,
+		</AuthContextProvider>
+	</ChakraProvider>,
 	document.getElementById("root")
 );

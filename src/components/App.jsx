@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import networkInterceptor from "../network/interceptor";
 import Home from "./Home";
 import Login from "./Login";
+import Profile from "./Profile";
 import Signup from "./Signup";
 
 const App = () => {
@@ -23,6 +24,9 @@ const App = () => {
 			<Switch>
 				<PrivateRoute exact path="/">
 					<Home />
+				</PrivateRoute>
+				<PrivateRoute path="/profile/:username">
+					<Profile />
 				</PrivateRoute>
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/signup" component={Signup} />

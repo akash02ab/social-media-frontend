@@ -27,13 +27,12 @@ const AuthContextProvider = ({ children }) => {
 		}
 
 		try {
-			const response = await axios.post("auth/signin/", {
+			const response = await axios.post("auth/signin", {
 				username: inputRef.current.username.value,
 				password: inputRef.current.password.value,
 			});
 
 			const data = await response.data;
-
 			setAuthError(null);
 			setUser(data);
 			localStorage.setItem("social-media", JSON.stringify(data));
@@ -42,37 +41,6 @@ const AuthContextProvider = ({ children }) => {
 			setAuthError(err.response.data);
 		}
 	};
-
-	// const signup = async () => {
-	// 	for (let key in inputRef.current) {
-	// 		if (inputRef.current[key].value === "") {
-	// 			console.log("/n/nhere");
-	// 			setAuthError(`${key} is required.`);
-	// 			return;
-	// 		}
-	// 	}
-
-	// 	let formData = new FormData();
-	// 	formData.append("username", inputRef.current.username.value);
-	// 	formData.append("email", inputRef.current.email.value);
-	// 	formData.append("password", inputRef.current.password.value);
-	// 	formData.append("repassword", inputRef.current.repassword.value);
-
-	// 	if (avatar) {
-	// 		formData.append("avatar", avatar);
-	// 	}
-	// 	console.log(formData);
-	// 	try {
-	// 		await axios.post("auth/signup/", { data: formData });
-
-	// 		setAuthError(null);
-	// 		setSuccess("Successful.");
-	// 	} catch (err) {
-	// 		setSuccess(null);
-	// 		console.log(err.response);
-	// 		setAuthError(err.response.data);
-	// 	}
-	// };
 
 	const signup = async () => {
 		for (let key in inputRef.current) {
@@ -92,7 +60,7 @@ const AuthContextProvider = ({ children }) => {
 			formData.append("avatar", avatar);
 		}
 
-		const response = await fetch("http://localhost:8080/auth/signup", {
+		const response = await fetch("https://socia-media-api.herokuapp.com/auth/signup", {
 			method: "POST",
 			mode: "cors",
 			body: formData,
@@ -113,7 +81,7 @@ const AuthContextProvider = ({ children }) => {
 		let { _id } = JSON.parse(localStorage.getItem("social-media"));
 
 		try {
-			await axios.post("auth/signout/", { _id });
+			await axios.post("auth/signout", { _id });
 
 			localStorage.removeItem("social-media");
 
@@ -131,7 +99,18 @@ const AuthContextProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ login, signup, logout, getCurrentlySignedInUser, inputRef, user, success, authError, setAvatar }}
+			value={{
+				login,
+				signup,
+				logout,
+				getCurrentlySignedInUser,
+				inputRef,
+				user,
+				success,
+				authError,
+				setAvatar,
+				setAuthError,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>
